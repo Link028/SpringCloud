@@ -1,0 +1,59 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+
+192.168.190.151 hadoop1
+192.168.190.152 hadoop2
+192.168.190.153 hadoop3
+192.168.190.154 hadoop4
+192.168.190.156 hadoop6
+192.168.190.157 hadoop7
+192.168.190.158 hadoop8
+192.168.190.159 hadoop9
+192.168.190.160 hadoop10
+192.168.190.161 hadoop11
+192.168.190.162 hadoop12
+192.168.190.163 hadoop13
+192.168.190.164 hadoop14
+192.168.190.165 hadoop15
+
+115.28.139.137 gateway.com
+115.28.139.137 gateway1.com
+115.28.139.137 gateway2.com
+115.28.139.137 gateway3.com
+
+115.28.139.137 registry.com
+115.28.139.137 registry1.com
+115.28.139.137 registry2.com
+115.28.139.137 registry3.com
+
+115.28.139.137 redisserver
+115.28.139.137 monitorserver
+127.0.0.1      webserver
+
+#127.0.0.1 gateway.com
+#127.0.0.1 registry.com
+#127.0.0.1 redisserver
+#115.28.139.137 webserver
+
+192.30.253.113  github.com
+151.101.25.194 github.global.ssl.fastly.net
+192.30.253.121 codeload.github.com

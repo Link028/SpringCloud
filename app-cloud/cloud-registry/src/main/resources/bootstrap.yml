@@ -1,0 +1,88 @@
+#################################################################################################
+# 服务器配置   
+server:
+  port: 8082
+  compression:
+    enabled: true
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
+    min-response-size: 1024  
+# 日志配置   
+logging:
+  file: logs/cloud-registry.log   
+  level:
+    root: INFO 
+
+#################################################################################################
+# 配置Eureka Server 信息
+eureka:
+  instance:
+    hostname: registry.com
+    instanceId: ${spring.application.name}:${server.port}:${random.value}  #eureka服务端的实例名称
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 10 
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+    metadata-map:
+      zone: primary # This is needed for the load balancer
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  server:
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 60000      
+    peer-node-read-timeout-ms: 120000
+  client:
+    enabled: true
+    register-with-eureka: true  # 默认值为false，在这种情况下Spring Boot Admin 管理中心无法监控注册中心组件的运行情况
+    fetch-registry: true
+    registryFetchIntervalSeconds: 15
+    instance-info-replication-interval-seconds: 30
+    registry-fetch-interval-seconds: 30  
+    healthcheck: 
+        enabled: true
+    service-url: 
+       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@registry.com:8082/eureka/
+       #defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@registserver1:8082/eureka/,http://${spring.security.user.name}:${spring.security.user.password}@registserver2:8082/eureka/,http://${spring.security.user.name}:${spring.security.user.password}@registserver3:8082/eureka/
+       #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/        
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+  endpoint:
+    health:
+      show-details: ALWAYS  
+      
+#################################################################################################    
+# SpringBoot配置      
+spring:
+  application:
+    name: registry
+  security:   
+    user:
+      name: admin
+      password: Dev2019
+      roles: SERVICE_NODE
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true       
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+
+
+
